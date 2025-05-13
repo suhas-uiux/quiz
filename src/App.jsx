@@ -4,13 +4,11 @@ import "./App.css";
 const quizData = [
   {
     question: `console.log(typeof null);`,
-    language: "javascript",
     options: ["'object'", "'null'", "'undefined'", "'number'"],
     answer: "'object'",
   },
   {
     question: `print("Hello" * 3)`,
-    language: "python",
     options: [
       '"Hello Hello Hello"',
       '"HelloHelloHello"',
@@ -21,13 +19,14 @@ const quizData = [
   },
   {
     question: `#include <stdio.h>\nint main() {\n  int x = 10;\n  printf("%d", x++);\n  return 0;\n}`,
-    language: "c",
     options: ["10", "11", "Compilation error", "Garbage value"],
     answer: "10",
   },
 ];
 
 function App() {
+  const [teamNames, setTeamNames] = useState({ member1: "", member2: "" });
+  const [started, setStarted] = useState(false);
   const [currentAnswers, setCurrentAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [showPasswordPopup, setShowPasswordPopup] = useState(false);
@@ -65,40 +64,84 @@ function App() {
     }
   };
 
+  const handleStartQuiz = () => {
+    if (teamNames.member1 && teamNames.member2) {
+      setStarted(true);
+    }
+  };
+
+  if (!started) {
+    return (
+      <div className="App">
+        <h1 className="title">👥 Team Registration</h1>
+        <div className="team-form">
+          <input
+            type="text"
+            placeholder="Enter Team Member 1 Name"
+            value={teamNames.member1}
+            onChange={(e) =>
+              setTeamNames({ ...teamNames, member1: e.target.value })
+            }
+          />
+          <input
+            type="text"
+            placeholder="Enter Team Member 2 Name"
+            value={teamNames.member2}
+            onChange={(e) =>
+              setTeamNames({ ...teamNames, member2: e.target.value })
+            }
+          />
+          <button
+            className="submit-btn"
+            onClick={handleStartQuiz}
+            disabled={!teamNames.member1 || !teamNames.member2}
+          >
+            Start Quiz
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
-      <h1>Coding Quiz App</h1>
+      <h1 className="title">Tech Quiz Challenge</h1>
 
       {!submitted ? (
         <div>
           {quizData.map((q, index) => (
             <div key={index} className="question-block">
-              <h3>Q{index + 1}:</h3>
+              <h3 className="q-number">Q{index + 1}:</h3>
               <pre className="code-snippet">
                 <code>{q.question}</code>
               </pre>
-              {q.options.map((option, i) => (
-                <button
-                  key={i}
-                  onClick={() => handleOptionClick(index, option)}
-                  className={
-                    currentAnswers[index] === option ? "selected" : ""
-                  }
-                >
-                  {option}
-                </button>
-              ))}
+              <div className="options">
+                {q.options.map((option, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleOptionClick(index, option)}
+                    className={
+                      currentAnswers[index] === option
+                        ? "option-btn selected"
+                        : "option-btn"
+                    }
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
             </div>
           ))}
           <button onClick={handleSubmit} className="submit-btn">
-            Submit
+             Submit Quiz
           </button>
         </div>
       ) : (
-        <div>
-          <h2>Thank you for attending the quiz!</h2>
+        <div className="thank-you-block">
+          <h2> Thank you {teamNames.member1} & {teamNames.member2}!</h2>
+          <p>Your answers have been recorded.</p>
           <button onClick={handleViewScore} className="view-score-btn">
-            View Score
+             View Score
           </button>
         </div>
       )}
@@ -111,6 +154,7 @@ function App() {
               type="password"
               value={passwordInput}
               onChange={(e) => setPasswordInput(e.target.value)}
+              placeholder="Enter password"
             />
             <button onClick={handlePasswordCheck}>Submit</button>
           </div>
@@ -119,7 +163,7 @@ function App() {
 
       {scoreVisible && (
         <div className="score-display">
-          <h3>Your Score: {calculateScore()} / {quizData.length}</h3>
+          <h3>{teamNames.member1} & {teamNames.member2}, your Score: {calculateScore()} / {quizData.length}</h3>
         </div>
       )}
     </div>
