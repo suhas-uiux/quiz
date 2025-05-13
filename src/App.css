@@ -1,41 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Montserrat:wght@500;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0d1117;
+  color: #e6edf3;
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .App {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
+  width: 100%;
+  max-width: 1000px;
+  padding: 30px 20px;
+  box-sizing: border-box;
+}
+
+
+.title {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5em;
+  color: #58a6ff;
 }
 
 .question-block {
-  margin-bottom: 30px;
-  background: #f9f9f9;
-  padding: 15px;
+  background-color: #161b22;
+  border: 1px solid #30363d;
   border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.q-number {
+  margin-bottom: 10px;
+  color: #79c0ff;
 }
 
 .code-snippet {
-  background: #272822;
+  background-color: #0d1117;
   color: #f8f8f2;
+  font-family: 'Fira Code', monospace;
   padding: 15px;
   border-radius: 5px;
-  font-family: "Courier New", Courier, monospace;
   overflow-x: auto;
   white-space: pre-wrap;
+  margin-bottom: 15px;
+  font-size: 0.95em;
+  border: 1px solid #30363d;
 }
 
-button {
-  margin: 5px;
-  padding: 10px 20px;
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-btn {
+  background-color: #21262d;
+  border: 1px solid #30363d;
+  padding: 10px 15px;
+  text-align: left;
+  border-radius: 6px;
+  color: #e6edf3;
+  font-size: 1em;
   cursor: pointer;
+  transition: 0.2s;
+}
+
+.option-btn:hover {
+  background-color: #30363d;
 }
 
 .selected {
-  background-color: #d3d3d3;
+  background-color: #1f6feb;
+  border-color: #388bfd;
 }
 
 .submit-btn, .view-score-btn {
-  margin-top: 20px;
-  padding: 10px 20px;
+  background-color: #238636;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
   font-weight: bold;
+  color: white;
+  font-size: 1.1em;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover, .view-score-btn:hover {
+  background-color: #2ea043;
 }
 
 .popup {
@@ -44,18 +104,65 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(13, 17, 23, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .popup-content {
-  background: white;
+  background-color: #161b22;
   padding: 30px;
-  border-radius: 10px;
-  width: 300px;
-  margin: 100px auto;
+  border-radius: 8px;
   text-align: center;
+  border: 1px solid #30363d;
+}
+
+.popup-content input {
+  padding: 10px;
+  margin: 15px 0;
+  width: 80%;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  background: #0d1117;
+  color: #e6edf3;
+}
+
+.popup-content button {
+  padding: 10px 20px;
+  background-color: #1f6feb;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .score-display {
-  margin-top: 20px;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 1.5em;
+  color: #58a6ff;
+}
+.team-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+}
+
+.team-form input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  background-color: #0d1117;
+  color: #e6edf3;
+  font-size: 1em;
 }
